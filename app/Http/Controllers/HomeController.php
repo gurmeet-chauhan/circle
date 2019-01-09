@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $statuses = User::find(auth()->user()->id)->statuses->sortByDesc('id');
+        return view('home', compact('statuses'));
     }
 }
