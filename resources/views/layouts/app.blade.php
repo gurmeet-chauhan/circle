@@ -7,6 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
@@ -35,6 +38,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @if (Auth::check())
+                        <li class="{{ Request::path() == '/' ? 'active' : '' }}">
+                            <a class="nav-link" href="/">Feed</a>
+                        </li>
+                        <li class="{{ Request::path() == 'home' ? 'active' : '' }}">
+                            <a class="nav-link" href="/home">Profile</a>
+                        </li>
+                        @endif
 
                     </ul>
 
@@ -51,16 +62,16 @@
                                 </li>
                             @endif
                         @else
-                            <li class="{{ Request::path() == '/' ? 'active' : '' }}">
-                                <a class="nav-link" href="/">Feed</a>
-                            </li>
-                            <li class="{{ Request::path() == 'home' ? 'active' : '' }}">
-                                <a class="nav-link" href="/home">Profile</a>
-                            </li>
+                            <form class="form-inline my-2 my-lg-0" method="POST" action="/user/search">
+                                @csrf
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="input">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </form>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
+
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -79,6 +90,16 @@
                 </div>
             </div>
         </nav>
+
+        @if (count($errors))
+            <div class="container alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <main class="py-4">
             @yield('content')

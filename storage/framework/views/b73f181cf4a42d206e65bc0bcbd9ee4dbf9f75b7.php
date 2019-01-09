@@ -4,7 +4,7 @@
     <?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <h5><?php echo e($status->body); ?></h5> <?php echo e($status->owner->name); ?>
 
-    <p><span class="btn"><i class="fas fa-heart"></i> <?php echo e($status->likes); ?></span> &nbsp;&nbsp;
+    <p><i class="fas fa-heart"></i> <?php echo e($status->likes); ?> &nbsp;&nbsp;
         <?php echo e($status->created_at->diffForHumans()); ?>
 
     </p>

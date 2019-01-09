@@ -7,6 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
     <title><?php echo e(config('app.name', 'Laravel')); ?></title>
 
     <!-- Scripts -->
@@ -36,6 +39,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <?php if(Auth::check()): ?>
+                        <li class="<?php echo e(Request::path() == '/' ? 'active' : ''); ?>">
+                            <a class="nav-link" href="/">Feed</a>
+                        </li>
+                        <li class="<?php echo e(Request::path() == 'home' ? 'active' : ''); ?>">
+                            <a class="nav-link" href="/home">Profile</a>
+                        </li>
+                        <?php endif; ?>
 
                     </ul>
 
@@ -52,16 +63,16 @@
                                 </li>
                             <?php endif; ?>
                         <?php else: ?>
-                            <li class="<?php echo e(Request::path() == '/' ? 'active' : ''); ?>">
-                                <a class="nav-link" href="/">Feed</a>
-                            </li>
-                            <li class="<?php echo e(Request::path() == 'home' ? 'active' : ''); ?>">
-                                <a class="nav-link" href="/home">Profile</a>
-                            </li>
+                            <form class="form-inline my-2 my-lg-0" method="POST" action="/user/search">
+                                <?php echo csrf_field(); ?>
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="input">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </form>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
                                 </a>
+
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
@@ -81,6 +92,16 @@
                 </div>
             </div>
         </nav>
+
+        <?php if(count($errors)): ?>
+            <div class="container alert alert-danger">
+                <ul>
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <p><?php echo e($error); ?></p>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
         <main class="py-4">
             <?php echo $__env->yieldContent('content'); ?>
