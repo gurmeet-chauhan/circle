@@ -4,7 +4,17 @@
     <?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <h5><?php echo e($status->body); ?></h5> <?php echo e($status->owner->name); ?>
 
-    <p><i class="fas fa-heart"></i> <?php echo e($status->likes); ?> &nbsp;&nbsp;
+    <p>
+            
+            <?php if(auth()->user()->likes->where('status_id', $status->id)->first()): ?>
+                <i class="fas fa-heart text-danger"></i>    
+            <?php else: ?>
+                <a href="/like/<?php echo e($status->id); ?>">
+                    <i class="fas fa-heart"></i>
+                </a>
+            <?php endif; ?>
+         <?php echo e($status->likes); ?> 
+        &nbsp;&nbsp;
         <?php echo e($status->created_at->diffForHumans()); ?>
 
     </p>

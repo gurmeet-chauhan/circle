@@ -31,4 +31,9 @@ class User extends Authenticatable
     public function statuses() {
         return $this->hasMany(Status::class, 'owner_id');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

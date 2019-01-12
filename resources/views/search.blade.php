@@ -10,7 +10,7 @@
         @endif
         @foreach ($users as $user)
             <p>
-            <a href="">{{ $user->name }}</a>
+            <a href="/user/profile/{{ $user->id }}">{{ $user->name }}</a>
             <button class="btn btn-primary ml-5">Follow</button>
             </p>
 

@@ -16,7 +16,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <form action="/status/create" method="POST">
+                    <form action="/status" method="POST">
                         <?php echo csrf_field(); ?>
 
                         <div class="form-group">
@@ -43,6 +43,12 @@
                         <i class="fas fa-heart"></i> <?php echo e($status->likes); ?> &nbsp;&nbsp;
                         <?php echo e($status->created_at->diffForHumans()); ?>
 
+
+                        <form action="/status/<?php echo e($status->id); ?>" method="post">
+                            <?php echo method_field('DELETE'); ?>
+                            <?php echo csrf_field(); ?>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </p>
 
                 </div>

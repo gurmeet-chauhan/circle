@@ -8,7 +8,7 @@
         <?php endif; ?>
         <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <p>
-            <a href=""><?php echo e($user->name); ?></a>
+            <a href="/user/profile/<?php echo e($user->id); ?>"><?php echo e($user->name); ?></a>
             <button class="btn btn-primary ml-5">Follow</button>
             </p>
 
