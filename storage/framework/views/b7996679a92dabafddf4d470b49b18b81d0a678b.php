@@ -39,17 +39,14 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><?php echo e($status->body); ?></h4>
-                    <p class="card-text">
-                        <i class="fas fa-heart"></i> <?php echo e($status->likes); ?> &nbsp;&nbsp;
-                        <?php echo e($status->created_at->diffForHumans()); ?>
+                    
+                    <?php echo $__env->make('partials.likes', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-
-                        <form action="/status/<?php echo e($status->id); ?>" method="post">
-                            <?php echo method_field('DELETE'); ?>
-                            <?php echo csrf_field(); ?>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </p>
+                    <form action="/status/<?php echo e($status->id); ?>" method="post">
+                        <?php echo method_field('DELETE'); ?>
+                        <?php echo csrf_field(); ?>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
 
                 </div>
             </div>

@@ -8,10 +8,17 @@ use App\User;
 class UserController extends Controller
 {
     public function index($id)
-    {
-        
+    {        
         $user = User::find($id);
-        $userStatues = $user->statuses; 
-        return view('Profile', ['user' => $user, 'userStatuses' => $userStatues->sortByDesc('id')]);
+        $statues = $user->statuses; 
+
+        if($user->id == auth()->user()->id)
+            return redirect('home');
+        
+        return view('profile', 
+        [
+            'user' => $user, 
+            'statuses' => $statues->sortByDesc('id')
+        ]);
     }
 }

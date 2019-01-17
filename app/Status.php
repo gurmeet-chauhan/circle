@@ -17,4 +17,11 @@ class Status extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    public static function updateLikesCount($id)
+    {
+        $status = Status::find($id);
+        $status->likes +=1;
+        $status->save();
+    }
 }

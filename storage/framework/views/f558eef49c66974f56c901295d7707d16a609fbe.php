@@ -1,25 +1,25 @@
 <?php $__env->startSection('content'); ?>
 
-<div class="container">
+<div class="col-md-6 offset-md-3">
     <?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <h5><?php echo e($status->body); ?></h5> <?php echo e($status->owner->name); ?>
-
-    <p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5><?php echo e($status->body); ?></h5> 
             
-            <?php if(auth()->user()->likes->where('status_id', $status->id)->first()): ?>
-                <i class="fas fa-heart text-danger"></i>    
-            <?php else: ?>
-                <a href="/like/<?php echo e($status->id); ?>">
-                    <i class="fas fa-heart"></i>
-                </a>
-            <?php endif; ?>
-         <?php echo e($status->likes); ?> 
-        &nbsp;&nbsp;
-        <?php echo e($status->created_at->diffForHumans()); ?>
+            <a href="/user/profile/<?php echo e($status->owner->id); ?>" class="card-link ">
+                <?php echo e($status->owner->name); ?>
 
-    </p>
-    <hr>
+            </a>
+            
+            <?php echo $__env->make('partials.likes', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            
+        </div>
+      </div>
+    
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+    <?php echo e($statuses->links()); ?>
+
 </div>
     
 <?php $__env->stopSection(); ?>

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
+    protected $guarded = [];
+    
     public function user()
     {
         $this->belongsTo(User::class);
@@ -13,6 +15,6 @@ class Like extends Model
 
     public function status()
     {
-        $this->belongsTo(User::class);
+        $this->belongsTo(Status::class);
     }
 }

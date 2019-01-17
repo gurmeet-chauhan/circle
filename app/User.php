@@ -36,4 +36,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    public function initiator()
+    {
+        return $this->hasOne(Chat::class, 'initiator_id');
+    }
+
+    public function recipient()
+    {
+        return $this->hasOne(Chat::class, 'recipient_id');
+    }
 }

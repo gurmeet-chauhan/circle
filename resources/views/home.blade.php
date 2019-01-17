@@ -32,24 +32,25 @@
                 </div>
             </div>
 
-            <hr>
-            <h3 class="card-body mt-2">Your recent posts</h3>
-            <hr>
+            @if (count($statuses))
+                <h3 class="card-body display-4 mt-2">Your recent posts</h3>
+            @else
+                <h3 class="card-body display-4 mt-2">Update your status using above form</h3>
+            @endif
+            
 
             @foreach ($statuses as $status)
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">{{ $status->body }}</h4>
-                    <p class="card-text">
-                        <i class="fas fa-heart"></i> {{ $status->likes }} &nbsp;&nbsp;
-                        {{ $status->created_at->diffForHumans() }}
+                    
+                    @include('partials.likes')
 
-                        <form action="/status/{{ $status->id }}" method="post">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </p>
+                    <form action="/status/{{ $status->id }}" method="post">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
 
                 </div>
             </div>
