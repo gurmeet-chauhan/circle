@@ -24,7 +24,7 @@ class StatusController extends Controller
             'owner_id' => auth()->user()->id
         ]);
         
-        return redirect('home')->with('statusCreated', 'Status created.');
+        return redirect('home')->with('statusCreated', 'Status updated.');
     }
 
     public function destroy(Status $status)

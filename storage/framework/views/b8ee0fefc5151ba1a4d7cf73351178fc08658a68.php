@@ -1,8 +1,9 @@
-<nav class="navbar navbar-expand-md navbar-dark">
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-2">
     <div class="container">
-        <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-            <?php echo e(config('app.name', 'Circle')); ?>
-
+        <a class="navbar-brand" href="<?php echo e(url('/')); ?>">        
+            <i class="fas fa-circle text-success"></i>
+            <i class="fas fa-circle text-success"></i>
+            <i class="fas fa-circle text-success"></i>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
             <span class="navbar-toggler-icon"></span>
@@ -27,11 +28,14 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo e(route('register')); ?>">
-                            <i class="fas fa-search"></i>
+                <?php if(auth()->guard()->check()): ?>
+                    <li class="<?php echo e(Request::path() == 'search' ? 'active' : ''); ?>">
+                        <a class="nav-link" href="/search">
+                             <i class="fas fa-search"></i>
                         </a>
                     </li>
+                <?php endif; ?>
+                    
                 <!-- Authentication Links -->
                 <?php if(auth()->guard()->guest()): ?>
                     <li class="nav-item">

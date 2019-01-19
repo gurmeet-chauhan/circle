@@ -12,7 +12,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/like/{id}', 'StatusController@like');
 
     Route::get('/search', 'SearchController@search');
-    Route::post('/process', 'SearchController@process');
+    Route::any('/process', 'SearchController@process');
     Route::get('/user/profile/{id}', 'UserController@index');
 
     Route::get('/inbox', 'ChatController@inbox');

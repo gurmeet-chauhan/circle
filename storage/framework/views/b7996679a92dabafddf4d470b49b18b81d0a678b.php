@@ -31,9 +31,12 @@
                 </div>
             </div>
 
-            <hr>
-            <h3 class="card-body mt-2">Your recent posts</h3>
-            <hr>
+            <?php if(count($statuses)): ?>
+                <h3 class="card-body display-4 mt-2">Your recent posts</h3>
+            <?php else: ?>
+                <h3 class="card-body display-4 mt-2">Update your status using above form</h3>
+            <?php endif; ?>
+            
 
             <?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="card">

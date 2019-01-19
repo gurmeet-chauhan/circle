@@ -4,13 +4,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             
-            <div class="card mb-4">
+            <div class="card mb-2">
                 <div class="card-header">
                     <h3><?php echo e($user->name); ?></h3>
                     <p><?php echo e($user->bio); ?></p>
                     <a href="/chat/<?php echo e($user->id); ?>" class="btn btn-primary">Message</a>
                 </div>
             </div>
+
+            <h3>Recent</h3>
             
             <?php echo $__env->make('partials.statuses', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                 

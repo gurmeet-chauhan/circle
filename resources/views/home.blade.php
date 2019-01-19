@@ -33,9 +33,9 @@
             </div>
 
             @if (count($statuses))
-                <h3 class="card-body display-4 mt-2">Your recent posts</h3>
+                <h3 class="card-body mt-2">Your recent posts</h3>
             @else
-                <h3 class="card-body display-4 mt-2">Update your status using above form</h3>
+                <h3 class="card-body mt-2">Update your status using above form</h3>
             @endif
             
 

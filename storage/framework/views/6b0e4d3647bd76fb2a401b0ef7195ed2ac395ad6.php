@@ -1,6 +1,17 @@
 <?php $__env->startSection('content'); ?>
+
+    <div class="col-md-6 offset-md-3 mb-4">
+        <form class="form-inline my-2 my-lg-0" method="POST" action="/process">
+            <?php echo csrf_field(); ?>
+            <input class="form-control mr-2" type="search" placeholder="Enter name" aria-label="Search" name="input">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
     
-    <div class="col-md-6 offset-md-3">
+    <?php if(isset($users)): ?>
+    <div class="col-md-6 offset-md-3">                
+                                
+        
         <?php if($users->isEmpty()): ?>
             <h2>User does not exist.</h2>
         <?php else: ?>
@@ -25,6 +36,7 @@
 
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
+    <?php endif; ?>
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

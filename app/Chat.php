@@ -23,7 +23,8 @@ class Chat extends Model
         return $this->hasMany(Message::class);
     }
 
-    public static function withUserId($id) {
+    public static function withUserId($id) 
+    {
         $chat = Chat::where('initiator_id', auth()->user()->id)
             ->where('recipient_id', $id)
             ->OrWhere('recipient_id', auth()->user()->id)
