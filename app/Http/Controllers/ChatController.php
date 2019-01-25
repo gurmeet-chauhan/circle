@@ -53,6 +53,13 @@ class ChatController extends Controller
                 'recipient_id' => $id
             ]);
 
+            Message::create([
+                'sender_id' => auth()->user()->id,
+                'reciever_id' => $id,
+                'chat_id' => $newChat->id,
+                'body' => "Connected"
+            ]);
+
             return view('chat.initiate', 
                 [
                     'chat_id' => $newChat->id,
