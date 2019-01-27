@@ -9,7 +9,7 @@ class SearchController extends Controller
 {
     public function search()
     {
-        return view('search');
+        return view('user.search');
     }
 
     public function process(Request $request)
@@ -22,6 +22,6 @@ class SearchController extends Controller
             'name', 'LIKE', '%' . implode($username) . '%'
         )->get ();
      
-        return view('search', compact('users'));
+        return view('user.search', compact('users'));
     }
 }

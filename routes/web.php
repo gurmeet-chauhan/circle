@@ -8,8 +8,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::post('/status', 'StatusController@store');
+    Route::get('/status/{status}', 'StatusController@show');
     Route::delete('/status/{status}', 'StatusController@destroy');
     Route::get('/like/{id}', 'StatusController@like');
+    Route::post('/comment/{status}', 'CommentController@store');
 
     Route::get('/search', 'SearchController@search');
     Route::any('/process', 'SearchController@process');

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Status;
 use App\Like;
+use App\Comment;
 
 class StatusController extends Controller
 {    
@@ -13,6 +13,18 @@ class StatusController extends Controller
     {        
         $statuses = Status::latest()->simplePaginate(10);
         return view('feed', compact('statuses'));
+    }
+
+    public function show(Status $status)
+    {
+        $comments = $status->comments()
+                        ->latest()
+                        ->get();
+
+        return view('statuses.show',[
+            'comments' => $comments,
+            'status' => $status
+        ]);
     }
     
     public function store()

@@ -15,7 +15,7 @@ class UserController extends Controller
         if($user->id == auth()->user()->id)
             return redirect('home');
         
-        return view('profile', 
+        return view('user.profile', 
         [
             'user' => $user, 
             'statuses' => $statues->sortByDesc('id')

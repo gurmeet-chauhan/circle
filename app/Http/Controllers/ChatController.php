@@ -59,13 +59,8 @@ class ChatController extends Controller
                 'chat_id' => $newChat->id,
                 'body' => "Connected"
             ]);
-
-            return view('chat.initiate', 
-                [
-                    'chat_id' => $newChat->id,
-                    'reciever_id' => $id
-                ]
-            );
+            
+            return redirect('messages/'.$newChat->id);
 
         } else {
             $messages = $chat->first()->messages;

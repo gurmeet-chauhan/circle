@@ -15,11 +15,17 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.css">
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
+    <style>
+        body {
+            font-family: montserrat;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -27,7 +33,11 @@
         @include('partials.nav')
         @include('partials.alerts')
 
-        <main class="py-4">
+        @if ( request()->path() == 'login' || request()->path() == 'register')
+            <main class="py-4">            
+        @else
+            <main class="col-md-6 offset-md-3 py-4">    
+        @endif        
             @yield('content')
         </main>
     </div>

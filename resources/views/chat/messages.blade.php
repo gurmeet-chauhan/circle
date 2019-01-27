@@ -1,29 +1,27 @@
 @extends('layouts.app')
 
-
     @section('content')
-    <div class="col-md-6 offset-md-3">
 
         @foreach ($messages->reverse() as $msg)
 
         @if (auth()->user()->id == $msg->sender_id)
-            <div class="card text-white bg-secondary mb-3 float-right" style="width:90%">            
+            <div class="card bg-info mb-3 float-right" style="width:90%">            
                 <div class="card-body">
-                        <p class="text-right">
+                        <h5 class="text-right text-white">
                             {{ $msg->body }}
                             <br>
-                            <small class="text-muted">{{ $msg->created_at->diffForHumans() }}</small>
-                        </p>
+                            <small>{{ $msg->created_at->diffForHumans() }}</small>
+                        </h5>
                 </div>
             </div>    
         @else
-            <div class="card text-white bg-primary mb-3" style="width:90%">            
+            <div class="card bg-warning mb-3" style="width:90%">            
                 <div class="card-body">
-                        <p class="text-left">
+                        <h5 class="text-left text-white">
                             {{ $msg->body }}
                             <br>
-                            <small class="text-muted">{{ $msg->created_at->diffForHumans() }}</small>
-                        </p>
+                            <small>{{ $msg->created_at->diffForHumans() }}</small>
+                        </h5>
                 </div>
             </div>
         @endif
@@ -43,13 +41,13 @@
                 value="{{ auth()->user()->id == $data->sender_id ? $data->reciever_id : $data->sender_id }}">
 
             <div class="form-group">                
-
-              <textarea class="form-control" name="body" id="message" rows="3" placeholder="write message here..."></textarea>
+                <label for="text">Write message</label>
+                <textarea class="form-control" name="body" id="message" rows="3" style="border: 1px solid"></textarea>
             </div>
 
             <input type="submit" class="btn btn-success btn-block text-center" value="send">
         </form>
 
         <p>{{ $messages->links() }}</p>
-    </div>
+
     @endsection

@@ -22,6 +22,9 @@
                 <li class="<?php echo e(Request::path() == 'inbox' ? 'active' : ''); ?>">
                     <a class="nav-link" href="/inbox">Chat</a>
                 </li>                
+                <li>
+                    <a class="nav-link" href="/home">Update Status</a>
+                </li>
                 <?php endif; ?>
 
             </ul>

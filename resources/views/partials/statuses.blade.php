@@ -1,5 +1,5 @@
 @foreach ($statuses as $status)
-    <div class="card">
+    <div class="card mb-2">
         <div class="card-header">
             <p>
                 {{ $status->body }}

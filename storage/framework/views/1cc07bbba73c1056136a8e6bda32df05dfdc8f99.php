@@ -7,8 +7,13 @@
         </a>
     <?php endif; ?>    
     <span><?php echo e($status->likes); ?></span>
-    <span class="float-right">
-        <?php echo e($status->created_at->diffForHumans()); ?>
+    <a href="/status/<?php echo e($status->id); ?>" class="ml-4">
+        <i class="fas fa-comment"></i> <?php echo e($status->comments()->count()); ?>
+
+        
+    </a>
+    <span class="float-right text-muted">
+        posted <?php echo e($status->created_at->diffForHumans()); ?>
 
     </span>
 </p>

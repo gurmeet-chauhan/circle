@@ -2,11 +2,14 @@
 
 @section('content')
 
-<div class="col-md-6 offset-md-3">
     @foreach ($statuses as $status)
-    <div class="card mb-4">
+    <div class="card mb-2">
         <div class="card-body">
-            <h5>{{ $status->body }}</h5> 
+            <h4>
+                <a href="/status/{{ $status->id }}">
+                    {{ $status->body }}
+                </a>                
+            </h4> 
             
             <a href="/user/profile/{{ $status->owner->id }}" class="card-link ">
                 {{ $status->owner->name }}
@@ -20,6 +23,5 @@
     @endforeach
 
     {{ $statuses->links() }}
-</div>
     
 @endsection

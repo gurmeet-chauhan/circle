@@ -7,7 +7,11 @@
         </a>
     @endif    
     <span>{{ $status->likes }}</span>
-    <span class="float-right">
-        {{ $status->created_at->diffForHumans() }}
+    <a href="/status/{{ $status->id }}" class="ml-4">
+        <i class="fas fa-comment"></i> {{ $status->comments()->count() }}
+        {{-- {{ $status->comments()->count() <= 1 ? 'comment' : 'comments' }} --}}
+    </a>
+    <span class="float-right text-muted">
+        posted {{ $status->created_at->diffForHumans() }}
     </span>
 </p>

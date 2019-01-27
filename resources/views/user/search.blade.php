@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="col-md-6 offset-md-3 mb-4">
+    <div class="mb-4">
         <form class="form-inline my-2 my-lg-0" method="POST" action="/process">
             @csrf
             <input class="form-control mr-2" type="search" placeholder="Enter name" aria-label="Search" name="input">
@@ -11,7 +11,7 @@
     </div>
     
     @isset($users)
-    <div class="col-md-6 offset-md-3">                
+    <div>                
                                 
         
         @if ($users->isEmpty())
@@ -19,9 +19,10 @@
         @else
             <h2 class="mb-4">Search result:</h2>
         @endif
+
         @foreach ($users as $user)
 
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-md-8">
                 <a href="/user/profile/{{ $user->id }}">
                     {{ $user->name }}
@@ -34,7 +35,7 @@
             </div>
         </div>                        
 
-
+        <hr>
         @endforeach
     </div>
     @endisset
