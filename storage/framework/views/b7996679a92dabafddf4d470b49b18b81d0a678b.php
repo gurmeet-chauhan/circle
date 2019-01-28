@@ -3,16 +3,25 @@
 
         <div class="card-header">
             <div class="row">
-                <div class="col-md-4">
-                    <img src="/images/profile/nodp.png" alt="no profile picture found" class="img-thumbnail img-fluid rounded-circle">
+                <div class="col-md-4 my-auto">
+                    <?php if( auth()->user()->profile_picture == null): ?>
+                        <img src="/images/profile/nodp.png" alt="no profile picture found" class="img-thumbnail img-fluid rounded-circle">                           
+                    <?php else: ?>
+                        <img src="<?php echo e(\Storage::url(auth()->user()->profile_picture)); ?>" alt="profile picture" class="img-thumbnail img-fluid">
+                    <?php endif; ?>
                 </div>
                 <div class="col-md-8 my-auto">
                     <h2><?php echo e(auth()->user()->name); ?></h2>
-                    <h5><?php echo e(auth()->user()->bio); ?></h5>
-                    <div class="form-group">
-                      <label for="profile_picture">Profile picture</label>
-                      <input type="file" class="form-control-file" name="profile_picture" id="profile_picture" placeholder="" aria-describedby="fileHelpId">
-                    </div>
+                    <h5><?php echo nl2br(e(auth()->user()->bio)); ?></h5>
+                    <hr>
+                    <form action="/profile/picture" method="POST" enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
+                        <div class="form-group">
+                            <label for="profile_picture">Change profile picture</label>
+                            <input type="file" class="form-control-file" name="profile_picture" id="profile_picture" placeholder="" aria-describedby="fileHelpId">
+                        </div>
+                        <input type="submit"  value="change" class="btn btn-sm">                        
+                    </form>                    
                 </div>
             </div>            
         </div>
@@ -24,13 +33,18 @@
                 </div>
             <?php endif; ?>
 
-            <form action="/status" method="POST">
+            <form action="/status" method="POST" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
 
+                <h3>Update status</h3>
                 <div class="form-group">
-                    <label for="body"><strong>Update status</strong></label>
                     <textarea class="form-control" name="body" id="body" rows="3" style="border: solid 1px"></textarea>
                 </div>
+                
+                <div class="form-group">
+                    <label for="profile_picture">Image(optional)</label>
+                    <input type="file" class="form-control-file" name="image" id="image">
+                </div>                    
 
                 <input type="submit" value="Post" class="btn btn-primary btn-block">
             </form>
@@ -47,24 +61,12 @@
         <?php endif; ?>
     </div>
 
-    <?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <div class="card">
-        <div class="card-body">            
-            <h4 class="card-title"><?php echo e($status->body); ?></h4>
-            
-            <?php echo $__env->make('partials.likes', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('partials.statuses', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-            <form action="/status/<?php echo e($status->id); ?>" method="post">
-                <?php echo method_field('DELETE'); ?>
-                <?php echo csrf_field(); ?>
-                <button type="submit" class="btn btn-danger float-right">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </form>
+    <div class="my-2">
+        <?php echo e($statuses->links()); ?>
 
-        </div>
-    </div>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>    
 
 <?php $__env->stopSection(); ?>
 

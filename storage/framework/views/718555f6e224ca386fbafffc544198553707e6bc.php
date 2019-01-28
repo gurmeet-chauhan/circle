@@ -1,6 +1,10 @@
 <?php $__env->startSection('content'); ?>
     <h1>Inbox</h1>
 
+    <?php if($chats->isEmpty()): ?>
+        <p>No chats found.</p>
+    <?php endif; ?>
+
     <?php $__currentLoopData = $chats; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $chat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         
         <?php

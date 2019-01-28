@@ -37,8 +37,8 @@ class Chat extends Model
     {
         $chat = Chat::find($id);
 
-        if(!$chat)
-            return redirect()->back();
+        if($chat == null)
+            abort('404');
 
         if($chat->initiator_id == auth()->user()->id 
                 || $chat->recipient_id == auth()->user()->id)
