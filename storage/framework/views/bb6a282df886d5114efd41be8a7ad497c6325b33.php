@@ -17,3 +17,9 @@
         <p><?php echo e(session('statusDeleted')); ?></p>
     </div>
 <?php endif; ?>
+
+<?php if(session('profilePicUpdated')): ?>
+    <div class="container alert alert-success">
+        <p><?php echo e(session('profilePicUpdated')); ?></p>
+    </div>
+<?php endif; ?>

@@ -29,10 +29,21 @@ class StatusController extends Controller
     
     public function store()
     {
-        request()->validate(['body' => 'required']);
+        request()->validate([
+            'body' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg|max:5120|nullable'
+        ]);
+
+        $path = null;
+
+        if(request()->has('image')) {
+            $path = request()->file('image')
+                        ->store('/public/images/status');
+        }        
 
         Status::create([
             'body' => request('body'),
+            'image' => $path,
             'owner_id' => auth()->user()->id
         ]);
         

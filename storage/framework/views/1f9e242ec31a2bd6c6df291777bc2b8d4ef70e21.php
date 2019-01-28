@@ -17,11 +17,13 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/footer.css')); ?>">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
     <style>
         body {
-            font-family: montserrat;
+            font-family: roboto;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -39,5 +41,13 @@
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
+
+    <footer class="footer">
+        <div class="text-center">
+            <span class="text-muted">Made with Laravel and 
+                <i class="fas fa-heart text-danger"></i>.
+            </span>
+        </div>
+    </footer>
 </body>
 </html>

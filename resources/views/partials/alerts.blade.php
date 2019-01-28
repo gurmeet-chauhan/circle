@@ -17,3 +17,9 @@
         <p>{{ session('statusDeleted') }}</p>
     </div>
 @endif
+
+@if (session('profilePicUpdated'))
+    <div class="container alert alert-success">
+        <p>{{ session('profilePicUpdated') }}</p>
+    </div>
+@endif

@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/search', 'SearchController@search');
     Route::any('/process', 'SearchController@process');
     Route::get('/user/profile/{id}', 'UserController@index');
+    Route::post('/profile/picture', 'UserController@update');
 
     Route::get('/inbox', 'ChatController@inbox');
     Route::get('/messages/{id}', 'ChatController@messages');

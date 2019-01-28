@@ -4,8 +4,28 @@
     <div class="card">
 
         <div class="card-header">
-            <h2>{{ auth()->user()->name }}</h2>
-            <h5>{{ auth()->user()->bio }}</h5>
+            <div class="row">
+                <div class="col-md-4 my-auto">
+                    @if ( auth()->user()->profile_picture == null)
+                        <img src="/images/profile/nodp.png" alt="no profile picture found" class="img-thumbnail img-fluid rounded-circle">                           
+                    @else
+                        <img src="{{ \Storage::url(auth()->user()->profile_picture) }}" alt="profile picture" class="img-thumbnail img-fluid">
+                    @endif
+                </div>
+                <div class="col-md-8 my-auto">
+                    <h2>{{ auth()->user()->name }}</h2>
+                    <h5>{!! nl2br(e(auth()->user()->bio)) !!}</h5>
+                    <hr>
+                    <form action="/profile/picture" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="profile_picture">Change profile picture</label>
+                            <input type="file" class="form-control-file" name="profile_picture" id="profile_picture" placeholder="" aria-describedby="fileHelpId">
+                        </div>
+                        <input type="submit"  value="change" class="btn btn-sm">                        
+                    </form>                    
+                </div>
+            </div>            
         </div>
         <div class="card-body">
             @if (session('status'))
@@ -14,13 +34,18 @@
                 </div>
             @endif
 
-            <form action="/status" method="POST">
+            <form action="/status" method="POST" enctype="multipart/form-data">
                 @csrf
 
+                <h3>Update status</h3>
                 <div class="form-group">
-                    <label for="body"><strong>Update status</strong></label>
                     <textarea class="form-control" name="body" id="body" rows="3" style="border: solid 1px"></textarea>
                 </div>
+                
+                <div class="form-group">
+                    <label for="profile_picture">Image(optional)</label>
+                    <input type="file" class="form-control-file" name="image" id="image">
+                </div>                    
 
                 <input type="submit" value="Post" class="btn btn-primary btn-block">
             </form>
@@ -37,23 +62,10 @@
         @endif
     </div>
 
-    @foreach ($statuses as $status)
-    <div class="card">
-        <div class="card-body">            
-            <h4 class="card-title">{{ $status->body }}</h4>
-            
-            @include('partials.likes')
+    @include('partials.statuses')
 
-            <form action="/status/{{ $status->id }}" method="post">
-                @method('DELETE')
-                @csrf
-                <button type="submit" class="btn btn-danger float-right">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </form>
-
-        </div>
-    </div>
-    @endforeach
+    <div class="my-2">
+        {{ $statuses->links() }}
+    </div>    
 
 @endsection

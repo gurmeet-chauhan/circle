@@ -4,13 +4,7 @@
         <div class="card-body">
 
             <h4 class="card-title"><?php echo e($status->body); ?></h4>
-            <p>
-                <a href="/user/profile/<?php echo e($status->owner->id); ?>" class="card-link ">
-                    <?php echo e($status->owner->name); ?>
 
-                </a>
-            </p>
-            
             <?php echo $__env->make('partials.likes', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             
             <form action="/comment/<?php echo e($status->id); ?>" method="post">

@@ -3,6 +3,10 @@
 @section('content')
     <h1>Inbox</h1>
 
+    @if ($chats->isEmpty())
+        <p>No chats found.</p>
+    @endif
+
     @foreach ($chats as $chat)
         
         @php

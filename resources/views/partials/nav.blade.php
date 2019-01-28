@@ -23,7 +23,7 @@
                     <a class="nav-link" href="/inbox">Chat</a>
                 </li>                
                 <li>
-                    <a class="nav-link" href="/home">Update Status</a>
+                    <a class="nav-link" href="/home#body">Update Status</a>
                 </li>
                 @endif
 

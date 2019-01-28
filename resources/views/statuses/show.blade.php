@@ -6,13 +6,18 @@
         <div class="card-body">
 
             <h4 class="card-title">{{ $status->body }}</h4>
-
+            <p>
+                <a href="/user/profile/{{ $status->owner->id }}" class="card-link ">
+                    {{ $status->owner->name }}
+                </a>
+            </p>
+            
             @include('partials.likes')
             
             <form action="/comment/{{ $status->id }}" method="post">
                 @csrf
                     <div class="form-group">
-                        <input type="text" name="body" id="body" class="form-control" placeholder="write here...">
+                        <input type="text" name="body" id="body" class="form-control" placeholder="write here..." required>
                     </div>
                     <input type="submit" value="comment" class="btn btn-success mb-4">
             </form>            

@@ -9,6 +9,10 @@ class CommentController extends Controller
 
     public function store($status)
     {
+        request()->validate([
+            'body' => 'required'
+        ]);
+
         Comment::create([
             'body' => request('body'),
             'status_id' => $status,

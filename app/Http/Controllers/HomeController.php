@@ -16,10 +16,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $statuses = User::find(auth()->user()->id)
-            ->statuses
-            ->sortByDesc('id');
-
+        $statuses = auth()->user()->statuses()->latest()->simplePaginate(15);
         return view('home', compact('statuses'));
     }
 

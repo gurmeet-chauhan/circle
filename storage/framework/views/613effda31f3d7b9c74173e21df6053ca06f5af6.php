@@ -1,5 +1,5 @@
 <?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <div class="card">
+    <div class="card mb-2">
         <div class="card-header">
             <p>
                 <?php echo e($status->body); ?>

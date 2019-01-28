@@ -17,9 +17,13 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
+    <style>
+        body {
+            font-family: montserrat;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -27,7 +31,11 @@
         <?php echo $__env->make('partials.nav', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         <?php echo $__env->make('partials.alerts', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-        <main class="py-4">
+        <?php if( request()->path() == 'login' || request()->path() == 'register'): ?>
+            <main class="py-4">            
+        <?php else: ?>
+            <main class="col-md-6 offset-md-3 py-4">    
+        <?php endif; ?>        
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>

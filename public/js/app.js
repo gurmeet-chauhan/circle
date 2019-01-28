@@ -36465,12 +36465,13 @@ $(".like-button").click(function (e) {
   var urlForLikeBtn = $(this).attr("href");
   var displayLikeCount = $(this).next();
   var likeCount = parseInt($(this).next().html());
-  displayLikeCount.text(++likeCount);
   LikeBtn.addClass("text-danger");
   $.get(urlForLikeBtn, function (data, status) {
     if (status != "success") {
       displayLikeCount.text(--likeCount);
       LikeBtn.removeClass("text-danger");
+    } else {
+      displayLikeCount.text(++likeCount);
     }
   });
 });
