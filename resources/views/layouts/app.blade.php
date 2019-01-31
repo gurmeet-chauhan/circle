@@ -13,7 +13,7 @@
     <title>Circle</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -49,5 +49,7 @@
             </span>
         </div>
     </footer>
+
+    @yield('script')
 </body>
 </html>

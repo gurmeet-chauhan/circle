@@ -13,7 +13,7 @@
     <title>Circle</title>
 
     <!-- Scripts -->
-    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
+    <script src="<?php echo e(asset('js/app.js')); ?>"></script>
 
     <!-- Styles -->
     <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
@@ -49,5 +49,7 @@
             </span>
         </div>
     </footer>
+
+    <?php echo $__env->yieldContent('script'); ?>
 </body>
 </html>

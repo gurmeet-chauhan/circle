@@ -17,5 +17,5 @@ $(".like-button").click(function(e){
             displayLikeCount.text(++likeCount);            
         }
 
-      });
-  });
+    });
+});

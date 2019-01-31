@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Events\MessageSent;
 use App\Chat;
 use App\Message;
 
@@ -15,7 +16,7 @@ class ChatController extends Controller
         $chats = Chat::where('initiator_id', auth()->user()->id)
             ->orWhere('recipient_id', auth()->user()->id)
             ->latest()
-            ->simplePaginate(5);
+            ->simplePaginate(10);
 
         return view('chat.inbox', compact('chats'));
     }
@@ -32,12 +33,14 @@ class ChatController extends Controller
             'body' => 'required'
         ]);
 
-        Message::create([
+        $message = Message::create([
             'sender_id' => auth()->user()->id,
             'reciever_id' => $request->reciever_id,
             'chat_id' => $request->chat_id,
             'body' => $request->body
         ]);
+
+        broadcast(new MessageSent($message))->toOthers();
 
         return redirect('messages/'.$request->chat_id);
     }
