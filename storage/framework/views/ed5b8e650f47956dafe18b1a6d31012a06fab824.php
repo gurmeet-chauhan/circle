@@ -4,6 +4,10 @@
         <div class="card-body">
 
             <h4 class="card-title"><?php echo e($status->body); ?></h4>
+
+            <?php if($status->image): ?>
+                <img src="<?php echo e(\Storage::url($status->image)); ?>" alt="status image" class="img-fluid my-1">
+            <?php endif; ?>
             <p>
                 <a href="/user/profile/<?php echo e($status->owner->id); ?>" class="card-link ">
                     <?php echo e($status->owner->name); ?>

@@ -12,9 +12,6 @@
 
     <title>Circle</title>
 
-    <!-- Scripts -->
-    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
-
     <!-- Styles -->
     <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/footer.css')); ?>">
@@ -49,5 +46,9 @@
             </span>
         </div>
     </footer>
+
+    <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+    <?php echo $__env->yieldContent('script'); ?>    
+    
 </body>
 </html>

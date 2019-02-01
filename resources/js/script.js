@@ -19,3 +19,8 @@ $(".like-button").click(function(e){
 
     });
 });
+
+// fade the alert
+$('.alert-close').click(function() {
+    $(this).parentsUntil('#alerts').fadeOut();
+})

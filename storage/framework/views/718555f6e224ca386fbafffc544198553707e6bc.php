@@ -19,7 +19,7 @@
                 <?php else: ?>
                     <a href="/messages/<?php echo e($chat->id); ?>"><?php echo e($chatInitiator->name); ?></a>
                 <?php endif; ?>
-                <p><?php echo e($chat->created_at->diffForHumans()); ?></p>
+                <p><?php echo e($chat->messages->last()->created_at->diffForHumans()); ?></p>
             </div>
         </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

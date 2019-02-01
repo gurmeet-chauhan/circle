@@ -21,7 +21,7 @@
                 @else
                     <a href="/messages/{{ $chat->id }}">{{ $chatInitiator->name }}</a>
                 @endif
-                <p>{{ $chat->created_at->diffForHumans() }}</p>
+                <p>{{ $chat->messages->last()->created_at->diffForHumans() }}</p>
             </div>
         </div>
     @endforeach

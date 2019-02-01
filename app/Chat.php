@@ -40,16 +40,14 @@ class Chat extends Model
         if($chat == null)
             abort('404');
 
-        if($chat->initiator_id == auth()->user()->id 
-                || $chat->recipient_id == auth()->user()->id)
+        if($chat->initiator_id != auth()->user()->id 
+                && $chat->recipient_id != auth()->user()->id)
         {
-            return Message::where('chat_id', $id)
+            abort('403');
+        }
+
+        return Message::where('chat_id', $id)
             ->orderBy('created_at', 'desc')
             ->simplePaginate(5);
-        }
-        else
-        {
-            return redirect()->back();
-        }
     }
 }
