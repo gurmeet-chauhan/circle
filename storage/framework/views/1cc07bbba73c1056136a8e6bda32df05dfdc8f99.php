@@ -6,7 +6,7 @@
             <i class="fas fa-heart"></i>            
         </a>
     <?php endif; ?>    
-    <span><?php echo e($status->likes); ?></span>
+    <span><?php echo e($status->likes()->count()); ?></span>
     <a href="/status/<?php echo e($status->id); ?>" class="ml-4">
         <i class="fas fa-comment"></i> <?php echo e($status->comments()->count()); ?>
 

@@ -23,7 +23,7 @@ class Status extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public static function updateLikesCount($id)
+    public function updateLikesCount($id)
     {
         $status = Status::find($id);
         $status->likes +=1;

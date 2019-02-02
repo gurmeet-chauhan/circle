@@ -23,7 +23,15 @@
                     <a class="nav-link" href="/inbox">Chat</a>
                 </li>                
                 <li>
-                    <a class="nav-link" href="/home#body">Update Status</a>
+                    <a class="nav-link" href="/home#update-status">Update Status</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/notifications">
+                        Notifications
+                        <?php if(auth()->user()->notifications()->count() > 0): ?>
+                            <strong><?php echo e(auth()->user()->notifications()->count()); ?></strong>
+                        <?php endif; ?>                        
+                    </a>
                 </li>
                 <?php endif; ?>
 

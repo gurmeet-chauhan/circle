@@ -6,7 +6,7 @@
             <i class="fas fa-heart"></i>            
         </a>
     @endif    
-    <span>{{ $status->likes }}</span>
+    <span>{{ $status->likes()->count() }}</span>
     <a href="/status/{{ $status->id }}" class="ml-4">
         <i class="fas fa-comment"></i> {{ $status->comments()->count() }}
         {{-- {{ $status->comments()->count() <= 1 ? 'comment' : 'comments' }} --}}

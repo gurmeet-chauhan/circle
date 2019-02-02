@@ -38,7 +38,7 @@
             <form action="/status" method="POST" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
 
-                <h3>Update status</h3>
+                <h3 id="update-status">Update status</h3>
                 <div class="form-group">
                     <textarea class="form-control" name="body" id="body" rows="3" style="border: solid 1px"></textarea>
                 </div>

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Like;
 
 class UserController extends Controller
 {
@@ -38,5 +40,14 @@ class UserController extends Controller
 
         return redirect()->back()->with('profilePicUpdated', 'Profile picture changed.');
 
+    }
+
+    public function notifications()
+    {                
+        $notifications = auth()->user()->unreadNotifications()
+                            ->latest()
+                            ->get();
+
+        return view('notifications', compact('notifications'));
     }
 }

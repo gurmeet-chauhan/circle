@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\StatusLiked;
 use App\Status;
 use App\Like;
 use App\Comment;
@@ -53,11 +54,12 @@ class StatusController extends Controller
     public function destroy(Status $status)
     {
         $status->delete();
-        return redirect('/home')->with('statusDeleted', 'Status deleted.');
+        return redirect()->back()->with('statusDeleted', 'Status deleted.');
     }
 
     public function like($id)
     {   
+        $status = Status::find($id);
         $alreadyLiked = Like::where('user_id', auth()->user()->id)
             ->where('status_id', $id)            
             ->get();
@@ -66,13 +68,14 @@ class StatusController extends Controller
             abort('429');
         }
 
-        Like::create([
+        $like = Like::create([
             'user_id' => auth()->user()->id,
             'status_id' => $id,
             'liked' => true
-        ]);
+        ]);        
 
-        Status::updateLikesCount($id);
+        if ($status->owner->id != auth()->user()->id)
+            $status->owner->notify(new StatusLiked($like->id));
 
         return redirect()->back();
     }

@@ -5,6 +5,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'StatusController@index');
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/notifications', 'UserController@notifications')->name('notifications');
 
 
     Route::post('/status', 'StatusController@store');

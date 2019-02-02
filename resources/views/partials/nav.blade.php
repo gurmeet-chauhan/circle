@@ -23,7 +23,15 @@
                     <a class="nav-link" href="/inbox">Chat</a>
                 </li>                
                 <li>
-                    <a class="nav-link" href="/home#body">Update Status</a>
+                    <a class="nav-link" href="/home#update-status">Update Status</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/notifications">
+                        Notifications
+                        @if (auth()->user()->notifications()->count() > 0)
+                            <strong>{{ auth()->user()->notifications()->count() }}</strong>
+                        @endif                        
+                    </a>
                 </li>
                 @endif
 
