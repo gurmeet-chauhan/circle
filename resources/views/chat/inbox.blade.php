@@ -13,9 +13,9 @@
             $chatRecipient = auth()->user()::find($chat->recipient_id);
             $chatInitiator = auth()->user()::find($chat->initiator_id);
         @endphp
-
-        <div class="card mb-4">
-            <div class="card-body">
+        
+        <div class="card mb-4 {{$chat->messages->last()->read != true ? "bg-dark" : ""}}">
+            <div class="card-body"> 
                 @if ($chatInitiator == auth()->user())
                     <a href="/messages/{{ $chat->id }}">{{ $chatRecipient->name }}</a>    
                 @else

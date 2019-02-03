@@ -13,7 +13,7 @@
                     @endif
                 </div>
                 <div class="col-md-8 my-auto">
-                    <h2>{{ auth()->user()->name }}</h2>
+                    <h2 class="mb-2">{{ auth()->user()->name }}</h2>
                     <h5>{!! nl2br(e(auth()->user()->bio)) !!}</h5>
                     <hr>
                     <form action="/profile/picture" method="POST" enctype="multipart/form-data">

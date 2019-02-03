@@ -20,7 +20,14 @@
                     <a class="nav-link" href="/home">Profile</a>
                 </li>
                 <li class="{{ Request::path() == 'inbox' ? 'active' : '' }}">
-                    <a class="nav-link" href="/inbox">Chat</a>
+                    <a class="nav-link" href="/inbox">
+                        Messages
+                        @if (auth()->user()->messagesRecieved->where('read', false)->count())                       
+                            <strong>
+                                {{ auth()->user()->messagesRecieved->where('read', false)->count()}}
+                            </strong>
+                        @endif                        
+                    </a>
                 </li>                
                 <li>
                     <a class="nav-link" href="/home#update-status">Update Status</a>
@@ -32,7 +39,7 @@
                             <strong>{{ auth()->user()->notifications()->count() }}</strong>
                         @endif                        
                     </a>
-                </li>
+                </li>                
                 @endif
 
             </ul>

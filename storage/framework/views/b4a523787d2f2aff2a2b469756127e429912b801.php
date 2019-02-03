@@ -20,7 +20,15 @@
                     <a class="nav-link" href="/home">Profile</a>
                 </li>
                 <li class="<?php echo e(Request::path() == 'inbox' ? 'active' : ''); ?>">
-                    <a class="nav-link" href="/inbox">Chat</a>
+                    <a class="nav-link" href="/inbox">
+                        Messages
+                        <?php if(auth()->user()->messagesRecieved->where('read', false)->count()): ?>                       
+                            <strong>
+                                <?php echo e(auth()->user()->messagesRecieved->where('read', false)->count()); ?>
+
+                            </strong>
+                        <?php endif; ?>                        
+                    </a>
                 </li>                
                 <li>
                     <a class="nav-link" href="/home#update-status">Update Status</a>
@@ -32,7 +40,7 @@
                             <strong><?php echo e(auth()->user()->notifications()->count()); ?></strong>
                         <?php endif; ?>                        
                     </a>
-                </li>
+                </li>                
                 <?php endif; ?>
 
             </ul>

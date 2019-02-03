@@ -53,7 +53,7 @@ class ChatController extends Controller
 
             $newChat = Chat::create([
                 'initiator_id' => auth()->user()->id,
-                'recipient_id' => $id
+                'recipient_id' => $id,
             ]);
 
             Message::create([

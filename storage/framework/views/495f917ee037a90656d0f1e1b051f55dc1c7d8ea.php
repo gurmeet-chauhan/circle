@@ -3,27 +3,32 @@
 <?php $__env->startSection('content'); ?>
 
     <div id="messages">
-    <?php $__currentLoopData = $messages->reverse(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php $__currentLoopData = $messages->reverse(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $message): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-    <?php if(auth()->user()->id == $msg->sender_id): ?>
+    <?php if(auth()->user()->id == $message->sender_id): ?>
         <div class="card bg-info mb-3 float-right" style="width:90%">            
             <div class="card-body">
                     <h5 class="text-right text-white">
-                        <?php echo e($msg->body); ?>
+                        <?php echo e($message->body); ?>
 
                         <br>
-                        <small><?php echo e($msg->created_at->diffForHumans()); ?></small>
+                        <small><?php echo e($message->created_at->diffForHumans()); ?></small>
                     </h5>
             </div>
         </div>    
     <?php else: ?>
+        <?php if(!$message->read): ?>
+            <?php
+                $message->update(["read" => true]);
+            ?>
+        <?php endif; ?>
         <div class="card bg-warning mb-3" style="width:90%">            
             <div class="card-body">
                     <h5 class="text-left text-white">
-                        <?php echo e($msg->body); ?>
+                        <?php echo e($message->body); ?>
 
                         <br>
-                        <small><?php echo e($msg->created_at->diffForHumans()); ?></small>
+                        <small><?php echo e($message->created_at->diffForHumans()); ?></small>
                     </h5>
             </div>
         </div>

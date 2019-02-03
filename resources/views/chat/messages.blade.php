@@ -3,25 +3,30 @@
 @section('content')
 
     <div id="messages">
-    @foreach ($messages->reverse() as $msg)
+    @foreach ($messages->reverse() as $message)
 
-    @if (auth()->user()->id == $msg->sender_id)
+    @if (auth()->user()->id == $message->sender_id)
         <div class="card bg-info mb-3 float-right" style="width:90%">            
             <div class="card-body">
                     <h5 class="text-right text-white">
-                        {{ $msg->body }}
+                        {{ $message->body }}
                         <br>
-                        <small>{{ $msg->created_at->diffForHumans() }}</small>
+                        <small>{{ $message->created_at->diffForHumans() }}</small>
                     </h5>
             </div>
         </div>    
     @else
+        @if (!$message->read)
+            @php
+                $message->update(["read" => true]);
+            @endphp
+        @endif
         <div class="card bg-warning mb-3" style="width:90%">            
             <div class="card-body">
                     <h5 class="text-left text-white">
-                        {{ $msg->body }}
+                        {{ $message->body }}
                         <br>
-                        <small>{{ $msg->created_at->diffForHumans() }}</small>
+                        <small>{{ $message->created_at->diffForHumans() }}</small>
                     </h5>
             </div>
         </div>

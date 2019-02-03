@@ -19,6 +19,7 @@ class CreateMessagesTable extends Migration
             $table->string('sender_id');
             $table->string('reciever_id');
             $table->text('body');
+            $table->boolean('read')->default(false);
             $table->timestamps();
         });
     }
