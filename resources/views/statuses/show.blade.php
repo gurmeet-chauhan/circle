@@ -8,7 +8,7 @@
             <h4 class="card-title">{{ $status->body }}</h4>
 
             @if ($status->image)
-                <img src="{{ \Storage::url($status->image) }}" alt="status image" class="img-fluid my-1">
+                <img src="/images/status/{{ $status->image }}" alt="status image" class="img-fluid my-1">
             @endif
             <p>
                 <a href="/user/profile/{{ $status->owner->id }}" class="card-link ">

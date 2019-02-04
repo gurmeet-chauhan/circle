@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
 use App\Notifications\StatusLiked;
 use App\Status;
 use App\Like;
 use App\Comment;
+use App\User;
 
 class StatusController extends Controller
 {    
 
     public function index()
-    {        
-        $statuses = Status::latest()->simplePaginate(10);
-        return view('feed', compact('statuses'));
+    {
+        $following = DB::table('followers')
+                    ->where('follower', auth()->user()->id)
+                    ->value('user_id');
+        
+        $statuses = Status::where('owner_id', $following)->latest()->simplePaginate(20);
+
+        return view('feed', ['statuses' => $statuses]);
     }
 
     public function show(Status $status)
@@ -35,16 +43,28 @@ class StatusController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg|max:5120|nullable'
         ]);
 
-        $path = null;
+        $image = null;
 
         if(request()->has('image')) {
-            $path = request()->file('image')
-                        ->store('/public/images/status');
+            $resizedImage = Image::make(request()->file('image'))
+                ->resize(720, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+            if($resizedImage->mime == "image/png") {
+                $resizedImage->extension = "png";
+            } else {
+                $resizedImage->extension = "jpg";
+            }
+
+            $image = time(). '.' .$resizedImage->extension;
+
+            $resizedImage->save('images/status/'. $image, 60);
         }        
 
         Status::create([
             'body' => request('body'),
-            'image' => $path,
+            'image' => $image,
             'owner_id' => auth()->user()->id
         ]);
         

@@ -2,6 +2,19 @@
 
 @section('content')
 
+    <div class="mb-4">
+        @if ($messages->first()->sender_id == auth()->user()->id)
+            <h3>
+                {{ App\user::find($messages->first()->reciever_id)->name }}
+            </h3>
+        @else
+            <h3>
+                {{ App\user::find($messages->first()->sender_id)->name }}
+            </h3>
+        @endif
+        
+    </div>
+
     <div id="messages">
     @foreach ($messages->reverse() as $message)
 

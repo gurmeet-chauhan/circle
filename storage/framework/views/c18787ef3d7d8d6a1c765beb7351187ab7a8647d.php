@@ -14,7 +14,7 @@
             $chatInitiator = auth()->user()::find($chat->initiator_id);
         ?>
         
-        <div class="card mb-4 <?php echo e($chat->messages->last()->read != true ? "bg-dark" : ""); ?>">
+        <div class="card mb-4">
             <div class="card-body"> 
                 <?php if($chatInitiator == auth()->user()): ?>
                     <a href="/messages/<?php echo e($chat->id); ?>"><?php echo e($chatRecipient->name); ?></a>    

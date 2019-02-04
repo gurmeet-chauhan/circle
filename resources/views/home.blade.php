@@ -9,12 +9,16 @@
                     @if ( auth()->user()->profile_picture == null)
                         <img src="/images/profile/nodp.png" alt="no profile picture found" class="img-thumbnail img-fluid rounded-circle">                           
                     @else
-                        <img src="{{ \Storage::url(auth()->user()->profile_picture) }}" alt="profile picture" class="img-thumbnail img-fluid">
+                        <img src="/images/profile/{{ auth()->user()->profile_picture }}" alt="profile picture" class="img-thumbnail img-fluid">
                     @endif
                 </div>
                 <div class="col-md-8 my-auto">
-                    <h2 class="mb-2">{{ auth()->user()->name }}</h2>
-                    <h5>{!! nl2br(e(auth()->user()->bio)) !!}</h5>
+                    <h2 class="my-3">{{ auth()->user()->name }}</h2>
+                    <h4>{!! nl2br(e(auth()->user()->bio)) !!}</h4>
+                    <h5>
+                        {{ $followers }}
+                        {{ $followers <= 1 ? 'follower' : 'followers' }}
+                    </h5>                    
                     <hr>
                     <form action="/profile/picture" method="POST" enctype="multipart/form-data">
                         @csrf

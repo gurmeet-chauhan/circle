@@ -52,6 +52,11 @@
                              <i class="fas fa-search"></i>
                         </a>
                     </li>
+                    <li class="{{ Request::path() == 'peoples' ? 'active' : '' }}">
+                        <a class="nav-link" href="/peoples">
+                            <i class="fas fa-users"></i>
+                        </a>
+                    </li>
                 @endauth
                     
                 <!-- Authentication Links -->

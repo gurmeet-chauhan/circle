@@ -2,6 +2,21 @@
 
 <?php $__env->startSection('content'); ?>
 
+    <div class="mb-4">
+        <?php if($messages->first()->sender_id == auth()->user()->id): ?>
+            <h3>
+                <?php echo e(App\user::find($messages->first()->reciever_id)->name); ?>
+
+            </h3>
+        <?php else: ?>
+            <h3>
+                <?php echo e(App\user::find($messages->first()->sender_id)->name); ?>
+
+            </h3>
+        <?php endif; ?>
+        
+    </div>
+
     <div id="messages">
     <?php $__currentLoopData = $messages->reverse(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $message): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 

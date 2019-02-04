@@ -10,7 +10,7 @@
         </h4> 
 
         <?php if($status->image): ?>
-            <img src="<?php echo e(\Storage::url($status->image)); ?>" alt="status image" class="img-fluid my-1">
+            <img src="/images/status/<?php echo e($status->image); ?>" alt="status image" class="img-fluid my-1">
         <?php endif; ?>    
         
         <a href="/user/profile/<?php echo e($status->owner->id); ?>" class="card-link ">

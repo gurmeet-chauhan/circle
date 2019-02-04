@@ -8,17 +8,29 @@
                     <?php if($user->profile_picture == null): ?>
                         <img src="/images/profile/nodp.png" alt="no profile picture found" class="img-thumbnail img-fluid rounded-circle">                           
                     <?php else: ?>
-                        <img src="<?php echo e(\Storage::url($user->profile_picture)); ?>" alt="profile picture" class="img-thumbnail img-fluid">
+                        <img src="/images/profile/<?php echo e($user->profile_picture); ?>" alt="profile picture" class="img-thumbnail img-fluid">
                     <?php endif; ?>                    
                 </div>
                 <div class="col-md-8 text-center my-auto">
-                    <h2><?php echo e($user->name); ?></h2>            
-                    <h5><?php echo nl2br(e($user->bio)); ?></h5>
+                    <h2 class="mt-2"><?php echo e($user->name); ?></h2>                    
+                    <h4><?php echo nl2br(e($user->bio)); ?></h4>
+                    <h5>
+                        <?php echo e($followers); ?>
+
+                        <?php echo e($followers <= 1 ? 'follower' : 'followers'); ?>
+
+                    </h5>
                 </div>                
             </div>
             
             <hr>
             <a href="/chat/<?php echo e($user->id); ?>" class="btn btn-primary">Message</a>
+            <?php if($follows->isEmpty()): ?>
+                <a href="/follow/<?php echo e($user->id); ?>" class="btn btn-primary">Follow</a>       
+            <?php else: ?>
+                <a href="/unfollow/<?php echo e($user->id); ?>" class="btn btn-secondry">Unfollow</a>
+            <?php endif; ?>
+            
         </div>
     </div>
 

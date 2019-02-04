@@ -9,12 +9,18 @@
                     <?php if( auth()->user()->profile_picture == null): ?>
                         <img src="/images/profile/nodp.png" alt="no profile picture found" class="img-thumbnail img-fluid rounded-circle">                           
                     <?php else: ?>
-                        <img src="<?php echo e(\Storage::url(auth()->user()->profile_picture)); ?>" alt="profile picture" class="img-thumbnail img-fluid">
+                        <img src="/images/profile/<?php echo e(auth()->user()->profile_picture); ?>" alt="profile picture" class="img-thumbnail img-fluid">
                     <?php endif; ?>
                 </div>
                 <div class="col-md-8 my-auto">
-                    <h2 class="mb-2"><?php echo e(auth()->user()->name); ?></h2>
-                    <h5><?php echo nl2br(e(auth()->user()->bio)); ?></h5>
+                    <h2 class="my-3"><?php echo e(auth()->user()->name); ?></h2>
+                    <h4><?php echo nl2br(e(auth()->user()->bio)); ?></h4>
+                    <h5>
+                        <?php echo e($followers); ?>
+
+                        <?php echo e($followers <= 1 ? 'follower' : 'followers'); ?>
+
+                    </h5>                    
                     <hr>
                     <form action="/profile/picture" method="POST" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>

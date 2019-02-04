@@ -66,8 +66,7 @@ class ChatController extends Controller
             return redirect('messages/'.$newChat->id);
 
         } else {
-            $messages = $chat->first()->messages;
-            return view('chat.messages', compact('messages'));
+            return redirect('messages/'.$chat->first()->id);
         }                    
     }
 }

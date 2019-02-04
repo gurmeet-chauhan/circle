@@ -17,7 +17,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/search', 'SearchController@search');
     Route::any('/process', 'SearchController@process');
     Route::get('/user/profile/{id}', 'UserController@index');
-    Route::post('/profile/picture', 'UserController@update');
+    Route::post('/profile/picture', 'UserController@picture');
+    Route::get('/follow/{id}', 'UserController@follow');
+    Route::get('/unfollow/{id}', 'UserController@unfollow');
+    Route::get('/peoples', 'UserController@peoples');
 
     Route::get('/inbox', 'ChatController@inbox');
     Route::get('/messages/{id}', 'ChatController@messages');

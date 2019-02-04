@@ -9,7 +9,7 @@
         </h4> 
 
         @if ($status->image)
-            <img src="{{ \Storage::url($status->image) }}" alt="status image" class="img-fluid my-1">
+            <img src="/images/status/{{ $status->image }}" alt="status image" class="img-fluid my-1">
         @endif    
         
         <a href="/user/profile/{{ $status->owner->id }}" class="card-link ">
