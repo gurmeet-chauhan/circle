@@ -15,7 +15,7 @@ class ChatController extends Controller
     {
         $chats = Chat::where('initiator_id', auth()->user()->id)
             ->orWhere('recipient_id', auth()->user()->id)
-            ->latest()
+            ->orderBy('updated_at', 'desc')
             ->simplePaginate(10);
 
         return view('chat.inbox', compact('chats'));
@@ -39,6 +39,9 @@ class ChatController extends Controller
             'chat_id' => $request->chat_id,
             'body' => $request->body
         ]);
+
+        $chat = Chat::find($request->chat_id);
+        $chat->update(['updated_at' => $message->created_at]);
 
         broadcast(new MessageSent($message))->toOthers();
 

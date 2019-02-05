@@ -20,11 +20,27 @@
                     <a class="nav-link" href="/home">Profile</a>
                 </li>
                 <li class="<?php echo e(Request::path() == 'inbox' ? 'active' : ''); ?>">
-                    <a class="nav-link" href="/inbox">Chat</a>
+                    <a class="nav-link" href="/inbox">
+                        Messages
+                        <?php if(auth()->user()->messagesRecieved->where('read', false)->count()): ?>                       
+                            <strong>
+                                <?php echo e(auth()->user()->messagesRecieved->where('read', false)->count()); ?>
+
+                            </strong>
+                        <?php endif; ?>                        
+                    </a>
                 </li>                
                 <li>
-                    <a class="nav-link" href="/home#body">Update Status</a>
+                    <a class="nav-link" href="/home#update-status">Update Status</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="/notifications">
+                        Notifications
+                        <?php if(auth()->user()->notifications()->count() > 0): ?>
+                            <strong><?php echo e(auth()->user()->notifications()->count()); ?></strong>
+                        <?php endif; ?>                        
+                    </a>
+                </li>                
                 <?php endif; ?>
 
             </ul>
@@ -35,6 +51,11 @@
                     <li class="<?php echo e(Request::path() == 'search' ? 'active' : ''); ?>">
                         <a class="nav-link" href="/search">
                              <i class="fas fa-search"></i>
+                        </a>
+                    </li>
+                    <li class="<?php echo e(Request::path() == 'peoples' ? 'active' : ''); ?>">
+                        <a class="nav-link" href="/peoples">
+                            <i class="fas fa-users"></i>
                         </a>
                     </li>
                 <?php endif; ?>

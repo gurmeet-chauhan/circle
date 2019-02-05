@@ -1,27 +1,47 @@
 <?php $__env->startSection('content'); ?>
 
-    <div id="messages">
-    <?php $__currentLoopData = $messages->reverse(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <div class="mb-4">
+        <?php if($messages->first()->sender_id == auth()->user()->id): ?>
+            <h3>
+                <?php echo e(App\user::find($messages->first()->reciever_id)->name); ?>
 
-    <?php if(auth()->user()->id == $msg->sender_id): ?>
+            </h3>
+        <?php else: ?>
+            <h3>
+                <?php echo e(App\user::find($messages->first()->sender_id)->name); ?>
+
+            </h3>
+        <?php endif; ?>
+        
+    </div>
+
+    <div id="messages">
+    <?php $__currentLoopData = $messages->reverse(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $message): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+    <?php if(auth()->user()->id == $message->sender_id): ?>
         <div class="card bg-info mb-3 float-right" style="width:90%">            
             <div class="card-body">
                     <h5 class="text-right text-white">
-                        <?php echo e($msg->body); ?>
+                        <?php echo e($message->body); ?>
 
                         <br>
-                        <small><?php echo e($msg->created_at->diffForHumans()); ?></small>
+                        <small><?php echo e($message->created_at->diffForHumans()); ?></small>
                     </h5>
             </div>
         </div>    
     <?php else: ?>
+        <?php if(!$message->read): ?>
+            <?php
+                $message->update(["read" => true]);
+            ?>
+        <?php endif; ?>
         <div class="card bg-warning mb-3" style="width:90%">            
             <div class="card-body">
                     <h5 class="text-left text-white">
-                        <?php echo e($msg->body); ?>
+                        <?php echo e($message->body); ?>
 
                         <br>
-                        <small><?php echo e($msg->created_at->diffForHumans()); ?></small>
+                        <small><?php echo e($message->created_at->diffForHumans()); ?></small>
                     </h5>
             </div>
         </div>

@@ -14,7 +14,7 @@
                 <div class="col-md-8 text-center my-auto">
                     <h2 class="mt-2">{{ $user->name }}</h2>                    
                     <h4>{!! nl2br(e($user->bio)) !!}</h4>
-                    <h5>
+                    <h5 class="text-muted">
                         {{ $followers }}
                         {{ $followers <= 1 ? 'follower' : 'followers' }}
                     </h5>
